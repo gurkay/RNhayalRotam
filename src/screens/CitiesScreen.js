@@ -11,7 +11,6 @@ const CitiesScreen = (props) => {
     const renderGridItem = (itemData) => {
         return (
             <CityGridTile
-                cityId={itemData.item.cityId}
                 cityName={itemData.item.cityName}
                 imageUrl={itemData.item.imageUrl}
                 cityLatitude={itemData.item.cityLatitude}

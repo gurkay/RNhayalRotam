@@ -11,14 +11,12 @@ import {
 
 const CityGridTile = (props) => {
 
-    console.log(props);
-
     let TouchableCmp = TouchableOpacity;
 
     if (Platform.OS === 'android' && Platform.Version >= 21) {
         TouchableCmp = TouchableNativeFeedback;
     }
-    const imgPath = '../images/';
+
     return (
         <View style={styles.gridItem}>
             <TouchableCmp style={{ flex: 1 }} onPress={props.onSelect}>

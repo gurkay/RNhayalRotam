@@ -1,26 +1,24 @@
 import React from 'react';
-import {
-    View,
-    Text,
-    Button,
-    StyleSheet
-} from 'react-native';
+
+import { PLACESCITY } from '../data/dummy-data';
+
+import PlaceList from '../components/PlaceList';
 
 const PlacesCityScreen = (props) => {
+
+    const cId = props.route.params.cityId;
+
+    const displayedPlaces = PLACESCITY.filter(
+        place => place.cityId.indexOf(cId) >= 0
+
+    );
+
     return (
-        <View>
-            <Text>
-                Places City Screen
-            </Text>
-            <Button title='PlaceDetailScreen' onPress={()=>{
-                props.navigation.navigate('PlaceDetail');
-            }}/>
-        </View>
+        <PlaceList
+            listData={displayedPlaces}
+            nav={props.navigation}
+        />
     );
 }
-
-const styles = StyleSheet.create({
-
-});
 
 export default PlacesCityScreen;
