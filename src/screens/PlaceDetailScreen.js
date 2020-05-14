@@ -30,12 +30,20 @@ const PlaceDetailScreen = (props) => {
         <ScrollView>
             <Image source={{ uri: selectedPlace.imageUrl }} style={styles.image} />
 
-            <View>
-                <Text style={styles.text}>Trip Time: {selectedPlace.duration}min</Text>
-                <Text style={styles.text}>Travel Difficulty: {selectedPlace.complexity}</Text>
-                <Text style={styles.text}>Price: {selectedPlace.enteryPrice}</Text>
-                <Text style={styles.title}>What is There?</Text>
+            <View style={styles.details}>
+                <View>
+                    <Text style={styles.text}>Trip Time: {selectedPlace.duration}min</Text>
+                    <Text style={styles.text}>Travel Difficulty: {selectedPlace.complexity}</Text>
+                    <Text style={styles.text}>Price: {selectedPlace.enteryPrice}</Text>
+                </View>
+                <View>
+                    <Button title='Route' onPree={()=>{}}/>
+                </View>
             </View>
+
+
+            <Text style={styles.title}>What is There?</Text>
+
             {
                 selectedPlace.ingredients.map(ingredient => (
                     <ListItem
@@ -68,7 +76,7 @@ const styles = StyleSheet.create({
     details: {
         flexDirection: 'row',
         padding: 15,
-        justifyContent: 'space-around'
+        justifyContent: 'space-between'
     },
     title: {
         fontFamily: 'open-sans-bold',
@@ -82,8 +90,8 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         padding: 10
     },
-    text:{
-        margin:5,
+    text: {
+        margin: 5,
     }
 });
 export default PlaceDetailScreen;
