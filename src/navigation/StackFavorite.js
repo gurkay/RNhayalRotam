@@ -15,39 +15,25 @@ import PlacesCityScreen from '../screens/PlacesCityScreen';
 import MapScreen from '../screens/MapScreen';
 import MyLocationScreen from '../screens/MyLocationScreen';
 
-import StackFavorite from '../navigation/StackFavorite';
-
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import BottomTabs from './BottomTabs';
+import CitiesScreen from '../screens/CitiesScreen';
 
 const StackNav = createStackNavigator();
 
-const Stack = (props) => {
+const StackFavorite = (props) => {
     return (
-        <StackNav.Navigator
-            initialRouteName="Cities"
-            headerMode="screen"
-        >
+        <StackNav.Navigator>
             <StackNav.Screen
                 name="Cities"
-                component={BottomTabs}
+                component={CitiesScreen}
                 options={({ route }) => {
                     const routeName = route.state
                         ? route.state.routes[route.state.index].name
                         : 'City';
                     return {
                         headerTitle: routeName,
-                        headerLeft: () => (
-                            <TouchableOpacity
-                                style={styles.container}
-                                onPress={() => props.navigation.dispatch(DrawerActions.openDrawer())}
-                            >
-                                <View>
-                                    <Ionicons name="ios-list" size={36} color="#900" />
-                                </View>
-                            </TouchableOpacity>
-                        )
                     };
                 }}
             />
@@ -65,7 +51,7 @@ const Stack = (props) => {
             />
             <StackNav.Screen
                 name="PlaceDetail"
-                component={PlaceDetailScreen}
+                component={BottomTabs}
                 options={({ route }) => {
                     const routeName = route.state
                         ? route.state.routes[route.state.index].name
@@ -104,4 +90,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default Stack;
+export default StackFavorite;

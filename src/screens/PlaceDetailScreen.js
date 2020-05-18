@@ -1,14 +1,18 @@
-import React from 'react';
+import React, { useEffect, useCallback } from 'react';
 import {
     View,
     ScrollView,
     Image,
-    Button,
     Text,
-    StyleSheet
+    StyleSheet,
+    TouchableOpacity
 } from 'react-native';
 
-import { PLACESCITY } from '../data/dummy-data';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+
+import { useSelector, useDispatch } from 'react-redux';
+import { toggleFavorite } from '../store/actions/cities';
+import GotoLocation from '../components/GoToLocation';
 
 const ListItem = (props) => {
     return (
@@ -20,11 +24,48 @@ const ListItem = (props) => {
 
 const PlaceDetailScreen = (props) => {
 
+    console.log("detaile screen : ", props);
     const placesCityId = props.route.params.placesCityId;
+    const availablePlacesCity = useSelector(state => state.cities.placesCity);
 
-    const selectedPlace = PLACESCITY.find(
-        place => place.placesCityId = placesCityId
+
+    const currentPlaceIsFavorite = useSelector(state =>
+        state.cities.favoritePlaces.some(place => place.placesCityId === placesCityId)
     );
+
+    const selectedPlace = availablePlacesCity.find(
+        place => place.placesCityId === placesCityId
+    );
+
+    const dispatch = useDispatch();
+
+    const toggleFavoriteHandler = useCallback(() => {
+        dispatch(toggleFavorite(placesCityId));
+    }, [dispatch, placesCityId]);
+
+    useEffect(() => {
+        props.navigation.setParams({ toggleFav: toggleFavoriteHandler });
+    }, [toggleFavoriteHandler]);
+
+    useEffect(() => {
+        props.navigation.setParams({ isFav: currentPlaceIsFavorite });
+    }, [currentPlaceIsFavorite]);
+
+    const tgglFav = props.route.params.toggleFav;
+
+    props.navigation.setOptions({
+        headerTitle: props.route.params.placesCityName,
+        headerRight: () => (
+            <TouchableOpacity
+                style={styles.container}
+                onPress={()=>{console.log("favorite")}}
+            >
+                <View style={styles.headerButtonContainer}>
+                    <Ionicons name="ios-star-outline" size={24} color="#4d8be3" />
+                </View>
+            </TouchableOpacity>
+        )
+    });
 
     return (
         <ScrollView>
@@ -37,7 +78,11 @@ const PlaceDetailScreen = (props) => {
                     <Text style={styles.text}>Price: {selectedPlace.enteryPrice}</Text>
                 </View>
                 <View>
-                    <Button title='Route' onPree={()=>{}}/>
+                    <GotoLocation
+                        plcLatitude={selectedPlace.placesCityLatitude}
+                        plcLongitude={selectedPlace.placesCityLongitude}
+                        navigation={props.navigation}
+                    />
                 </View>
             </View>
 
@@ -92,6 +137,14 @@ const styles = StyleSheet.create({
     },
     text: {
         margin: 5,
+    },
+    buttonContainer: {
+        flex: 1,
+        justifyContent: 'space-between',
+        alignItems: 'flex-end'
+    },
+    headerButtonContainer: {
+        marginRight: 5,
     }
 });
 export default PlaceDetailScreen;

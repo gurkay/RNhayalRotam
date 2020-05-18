@@ -2,7 +2,6 @@ import React from 'react';
 import {
     View,
     Text,
-    Platform,
     StyleSheet,
     TouchableOpacity
 } from 'react-native';
@@ -26,7 +25,11 @@ const DrawerContent = (props) => {
                     <Text style={styles.drawerText}>Cities</Text>
                 </View>
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity
+                onPress={() => {
+                    props.navigation.navigate('Favorites')
+                }}
+            >
                 <View style={styles.drawerContainer}>
                     <Ionicons name="md-add" size={24} color="#4d8be3" />
                     <Text style={styles.drawerText}>Favorites</Text>

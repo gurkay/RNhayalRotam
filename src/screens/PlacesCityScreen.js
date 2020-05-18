@@ -1,14 +1,16 @@
 import React from 'react';
-
-import { PLACESCITY } from '../data/dummy-data';
+import { useSelector } from 'react-redux';
 
 import PlaceList from '../components/PlaceList';
 
 const PlacesCityScreen = (props) => {
 
     const cId = props.route.params.cityId;
+    props.navigation.setOptions({headerTitle: props.route.params.cityName});
 
-    const displayedPlaces = PLACESCITY.filter(
+    const availablePlacesCity = useSelector(state => state.cities.placesCity);
+
+    const displayedPlaces = availablePlacesCity.filter(
         place => place.cityId.indexOf(cId) >= 0
 
     );
@@ -16,7 +18,7 @@ const PlacesCityScreen = (props) => {
     return (
         <PlaceList
             listData={displayedPlaces}
-            nav={props.navigation}
+            navigation={props.navigation}
         />
     );
 }

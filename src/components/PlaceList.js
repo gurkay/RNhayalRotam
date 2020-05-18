@@ -19,8 +19,9 @@ const PlaceList = (props) => {
                 affordability={itemData.item.affordability}
                 enteryPrice={itemData.item.enteryPrice}
                 onSelectPlace={() => {
-                    props.nav.navigate('PlaceDetail', {
-                        placesCityId: itemData.item.placesCityId
+                    props.navigation.navigate('PlaceDetail', {
+                        placesCityId: itemData.item.placesCityId,
+                        placesCityName: itemData.item.placesCityName
                     });                   
                 }}
                 

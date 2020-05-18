@@ -1,20 +1,12 @@
 import React from 'react';
 import {
-    View,
-    Text,
-    Platform,
     StyleSheet,
-    TouchableOpacity
 } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { DrawerContentScrollView } from '@react-navigation/drawer'
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import CitiesScreen from '../screens/CitiesScreen';
 import FavoritesScreen from '../screens/FavoritesScreen';
-import FiltersScreen from '../screens/FiltersScreen';
-import PlaceDetailScreen from '../screens/PlaceDetailScreen';
-import PlacesCityScreen from '../screens/PlacesCityScreen';
 
 
 const TabNav = createBottomTabNavigator();
@@ -24,7 +16,6 @@ const BottomTabs = (props) => {
         <TabNav.Navigator
             screenOptions={({ route }) => ({
                 tabBarIcon: ({ focused, color, size }) => {
-                    console.log("TabNav : ", {route})
                     let iconName;
                     if (route.name === 'Cities') {
                         iconName = focused
@@ -56,7 +47,6 @@ const BottomTabs = (props) => {
                 name="Favorites" 
                 component={FavoritesScreen} 
                 options={({ route }) => {
-                    console.log('!@# options', { route });
                     const routeName = route.state
                         ? route.state.routes[route.state.index].name
                         : 'Favorites';

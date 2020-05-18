@@ -5,13 +5,18 @@ import {
     StyleSheet
 } from 'react-native';
 
+import PlaceList from '../components/PlaceList';
+import { useSelector } from 'react-redux';
+
 const FavoritesScreen = (props) => {
+
+    const favPlaces = useSelector(state => state.cities.favoritePlaces);
+
     return (
-        <View>
-            <Text>
-                Favorites Screen
-            </Text>
-        </View>
+        <PlaceList
+            listData={favPlaces}
+            navigation={props.navigation}
+        />
     );
 }
 

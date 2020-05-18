@@ -1,16 +1,15 @@
 import React from 'react';
 
 import { NavigationContainer } from '@react-navigation/native';
-
-import { createDrawerNavigator } from '@react-navigation/drawer'
+import { createDrawerNavigator } from '@react-navigation/drawer';
 
 import DrawerContent from '../navigation/DrawerContent';
 import Stack from '../navigation/Stack';
 
 const DrawerNav = createDrawerNavigator();
 
-const Drawer = (props) => {
-    
+const Menus = (props) => {
+
     return (
         <DrawerNav.Navigator
             drawerContent={props => <DrawerContent {...props} />}
@@ -26,7 +25,7 @@ const MainNavigator = (props) => {
 
     return (
         <NavigationContainer>
-            <Drawer />
+            <Menus />
         </NavigationContainer>
     );
 }

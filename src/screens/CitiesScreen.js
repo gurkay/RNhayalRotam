@@ -17,7 +17,8 @@ const CitiesScreen = (props) => {
                 cityLongitude={itemData.item.cityLongitude}
                 onSelect={() => {
                     props.navigation.navigate('PlacesCity', {
-                        cityId: itemData.item.cityId
+                        cityId: itemData.item.cityId,
+                        cityName: itemData.item.cityName
                     });
                 }}
             />

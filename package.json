@@ -19,10 +19,13 @@
     "react-native": "0.62.2",
     "react-native-gesture-handler": "^1.6.1",
     "react-native-ionicons": "^5.0.0-rc",
+    "react-native-maps": "git+https://github.com/react-native-community/react-native-maps.git",
     "react-native-reanimated": "^1.8.0",
     "react-native-safe-area-context": "^1.0.0",
     "react-native-screens": "^2.7.0",
-    "react-native-vector-icons": "^6.6.0"
+    "react-native-vector-icons": "^6.6.0",
+    "react-redux": "^7.2.0",
+    "redux": "^4.0.5"
   },
   "devDependencies": {
     "@babel/core": "7.9.6",

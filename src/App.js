@@ -5,17 +5,29 @@ import {
     StyleSheet
 } from 'react-native';
 
-import { useScreens, enableScreens } from 'react-native-screens'
+import { enableScreens } from 'react-native-screens';
+import { createStore, combineReducers } from 'redux';
+import { Provider } from 'react-redux'
 
 import MainNavigator from './navigation/MainNavigator';
+import citiesReducer from './store/reducers/cities';
 
 enableScreens();
+
+const rootReducer = combineReducers({
+    cities: citiesReducer
+});
+
+const store = createStore(rootReducer);
 
 const App = (props) => {
 
     return (
-
-        <MainNavigator />
+        <Provider
+            store={store}
+        >
+            <MainNavigator />
+        </Provider>
     );
 }
 
