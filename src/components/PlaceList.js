@@ -5,11 +5,14 @@ import {
     StyleSheet
 } from 'react-native';
 
+import { useSelector } from 'react-redux';
+
 import PlaceItem from '../components/PlaceItem';
 
 const PlaceList = (props) => {
-    
+    const favoritePlaces = useSelector(state => state.cities.favoritePlaces);
     const renderPlaceItem = (itemData) => {
+        const isFavorite = favoritePlaces.some(place => place.placesCityId === itemData.item.placesCityId);
         return (
             <PlaceItem
                 placesCityName={itemData.item.placesCityName}
@@ -21,10 +24,11 @@ const PlaceList = (props) => {
                 onSelectPlace={() => {
                     props.navigation.navigate('PlaceDetail', {
                         placesCityId: itemData.item.placesCityId,
-                        placesCityName: itemData.item.placesCityName
-                    });                   
+                        placesCityName: itemData.item.placesCityName,
+                        isFav: isFavorite
+                    });
                 }}
-                
+
             />
         );
     }

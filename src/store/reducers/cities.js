@@ -13,12 +13,12 @@ const citiesReducer = (state = initialState, action) => {
         case TOGGLE_FAVORITE:
             const existingIndex = state.favoritePlaces.findIndex(placeCityId => placeCityId.placesCityId === action.placesCityId);
             if(existingIndex >= 0) {
-                const updatedFavCities = [...state.favoriteCities];
-                updatedFavCities.splice(existingIndex, 1);
-                return ({...state, favoritePlaces: updatedFavCities});
+                const updatedFavPlaces = [...state.favoritePlaces];
+                updatedFavPlaces.splice(existingIndex, 1);
+                return ({...state, favoritePlaces: updatedFavPlaces});
             } else {
-                const placeCity = state.placesCity.find(placeCity => placeCity.id === action.placesCityId)
-                return ({...state, favoritePlaces: state.favoritePlaces.concat(placeCity)});
+                const placesCity = state.placesCity.find(placesCity => placesCity.placesCityId === action.placesCityId)
+                return ({...state, favoritePlaces: state.favoritePlaces.concat(placesCity)});
             }            
         default:
             return state;

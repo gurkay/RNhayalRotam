@@ -11,6 +11,7 @@ import {
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import { useSelector, useDispatch } from 'react-redux';
+import { useFocusEffect } from '@react-navigation/native'
 import { toggleFavorite } from '../store/actions/cities';
 import GotoLocation from '../components/GoToLocation';
 
@@ -23,11 +24,14 @@ const ListItem = (props) => {
 }
 
 const PlaceDetailScreen = (props) => {
-
     console.log("detaile screen : ", props);
+
+    const isFavorite = props.route.params.isFav;
+
+    const dispatch = useDispatch();
+
     const placesCityId = props.route.params.placesCityId;
     const availablePlacesCity = useSelector(state => state.cities.placesCity);
-
 
     const currentPlaceIsFavorite = useSelector(state =>
         state.cities.favoritePlaces.some(place => place.placesCityId === placesCityId)
@@ -36,8 +40,6 @@ const PlaceDetailScreen = (props) => {
     const selectedPlace = availablePlacesCity.find(
         place => place.placesCityId === placesCityId
     );
-
-    const dispatch = useDispatch();
 
     const toggleFavoriteHandler = useCallback(() => {
         dispatch(toggleFavorite(placesCityId));
@@ -50,18 +52,19 @@ const PlaceDetailScreen = (props) => {
     useEffect(() => {
         props.navigation.setParams({ isFav: currentPlaceIsFavorite });
     }, [currentPlaceIsFavorite]);
-
-    const tgglFav = props.route.params.toggleFav;
-
+    
     props.navigation.setOptions({
         headerTitle: props.route.params.placesCityName,
         headerRight: () => (
             <TouchableOpacity
                 style={styles.container}
-                onPress={()=>{console.log("favorite")}}
+                onPress={toggleFavoriteHandler}
             >
                 <View style={styles.headerButtonContainer}>
-                    <Ionicons name="ios-star-outline" size={24} color="#4d8be3" />
+                    <Ionicons
+                        name={isFavorite ? "ios-star" : "ios-star-outline"}
+                        size={24}
+                        color="#4d8be3" />
                 </View>
             </TouchableOpacity>
         )
@@ -109,7 +112,6 @@ const PlaceDetailScreen = (props) => {
                 ))
             }
         </ScrollView>
-
     );
 }
 

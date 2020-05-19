@@ -16,7 +16,8 @@ class PlacesCity {
         phone,
         mail,
         placesCityLatitude,
-        placesCityLongitude
+        placesCityLongitude,
+        ownerId,
     ) {
         this.placesCityId = placesCityId;
         this.cityId = cityId;
@@ -35,6 +36,7 @@ class PlacesCity {
         this.mail = mail;
         this.placesCityLatitude = placesCityLatitude;
         this.placesCityLongitude = placesCityLongitude;
+        this.ownerId = ownerId;
     }
 }
 

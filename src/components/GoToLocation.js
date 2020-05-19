@@ -14,8 +14,8 @@ const GotoLocation = (props) => {
     console.log("goto loc : ", props);
 
     const openGps = () => {
-        var scheme = Platform.OS === 'ios' ? 'maps:' : 'geo:'
-        var url = scheme + props.plcLatitude + ',' + props.plcLongitude
+        const scheme = Platform.OS === 'ios' ? 'maps:' : 'geo:'
+        const url = scheme + props.plcLatitude + ',' + props.plcLongitude
         openExternalApp(url)
     }
 

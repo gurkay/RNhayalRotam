@@ -9,16 +9,13 @@ import {
 import { DrawerContentScrollView } from '@react-navigation/drawer'
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-
 const DrawerContent = (props) => {
-
+    console.log("#DrawerContent : ", props);
     return (
         <DrawerContentScrollView>
 
             <TouchableOpacity
-                onPress={() => {
-                    props.navigation.navigate('Cities')
-                }}
+                onPress={() => props.navigation.navigate('Cities')}
             >
                 <View style={styles.drawerContainer}>
                     <Ionicons name="md-home" size={24} color="#4d8be3" />
@@ -26,13 +23,20 @@ const DrawerContent = (props) => {
                 </View>
             </TouchableOpacity>
             <TouchableOpacity
-                onPress={() => {
-                    props.navigation.navigate('Favorites')
-                }}
+                onPress={() => props.navigation.navigate('Favorites')}
+            >
+                <View style={styles.drawerContainer}>
+                    <Ionicons name="md-star" size={24} color="#4d8be3" />
+                    <Text style={styles.drawerText}>Favorites</Text>
+                </View>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+                onPress={() => props.navigation.navigate('EditPlacesCity')}
             >
                 <View style={styles.drawerContainer}>
                     <Ionicons name="md-add" size={24} color="#4d8be3" />
-                    <Text style={styles.drawerText}>Favorites</Text>
+                    <Text style={styles.drawerText}>Add Place</Text>
                 </View>
             </TouchableOpacity>
 

@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { useSelector } from 'react-redux';
 
 import PlaceList from '../components/PlaceList';
@@ -12,7 +13,6 @@ const PlacesCityScreen = (props) => {
 
     const displayedPlaces = availablePlacesCity.filter(
         place => place.cityId.indexOf(cId) >= 0
-
     );
 
     return (

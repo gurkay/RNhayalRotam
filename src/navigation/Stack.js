@@ -8,14 +8,11 @@ import {
 import { createStackNavigator } from '@react-navigation/stack';
 import { DrawerActions } from '@react-navigation/native';
 
-
 import FavoritesScreen from '../screens/FavoritesScreen';
 import PlaceDetailScreen from '../screens/PlaceDetailScreen';
 import PlacesCityScreen from '../screens/PlacesCityScreen';
 import MapScreen from '../screens/MapScreen';
-import MyLocationScreen from '../screens/MyLocationScreen';
-
-import StackFavorite from '../navigation/StackFavorite';
+import EditPlacesCityScreen from '../screens/EditPlacesCityScreen';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
@@ -44,13 +41,14 @@ const Stack = (props) => {
                                 onPress={() => props.navigation.dispatch(DrawerActions.openDrawer())}
                             >
                                 <View>
-                                    <Ionicons name="ios-list" size={36} color="#900" />
+                                    <Ionicons name="ios-list" size={36} color="#4d8be3" />
                                 </View>
                             </TouchableOpacity>
                         )
                     };
                 }}
             />
+
             <StackNav.Screen
                 name="PlacesCity"
                 component={PlacesCityScreen}
@@ -78,17 +76,38 @@ const Stack = (props) => {
             <StackNav.Screen
                 name="Favorites"
                 component={FavoritesScreen}
-                options={{ headerTitle: 'Favorites Screen' }}
+                options={({ route }) => {
+                    const routeName = route.state
+                        ? route.state.routes[route.state.index].name
+                        : 'Favorites';
+                    return {
+                        headerTitle: routeName,
+                    };
+                }}
             />
             <StackNav.Screen
                 name="Map"
                 component={MapScreen}
-                options={{ headerTitle: 'Google Map' }}
+                options={({ route }) => {
+                    const routeName = route.state
+                        ? route.state.routes[route.state.index].name
+                        : 'Map Screen';
+                    return {
+                        headerTitle: routeName,
+                    };
+                }}
             />
             <StackNav.Screen
-                name="MyLocation"
-                component={MyLocationScreen}
-                options={{ headerTitle: 'Google Map' }}
+                name="EditPlacesCity"
+                component={EditPlacesCityScreen}
+                options={({ route }) => {
+                    const routeName = route.state
+                        ? route.state.routes[route.state.index].name
+                        : 'Edit Places City';
+                    return {
+                        headerTitle: routeName,
+                    };
+                }}
             />
         </StackNav.Navigator>
     );

@@ -30,7 +30,7 @@ const BottomTabs = (props) => {
                 },
             })}
             tabBarOptions={{
-                activeTintColor: 'tomato',
+                activeTintColor: '#4d8be3',
                 inactiveTintColor: 'gray',
             }}
         >

@@ -6,8 +6,9 @@ import {
 } from 'react-native';
 
 import { enableScreens } from 'react-native-screens';
-import { createStore, combineReducers } from 'redux';
-import { Provider } from 'react-redux'
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import ReduxThunk from 'redux-thunk';
 
 import MainNavigator from './navigation/MainNavigator';
 import citiesReducer from './store/reducers/cities';
@@ -18,7 +19,7 @@ const rootReducer = combineReducers({
     cities: citiesReducer
 });
 
-const store = createStore(rootReducer);
+const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
 
 const App = (props) => {
 

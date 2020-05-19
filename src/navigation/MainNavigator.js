@@ -5,7 +5,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 
 import DrawerContent from '../navigation/DrawerContent';
 import Stack from '../navigation/Stack';
-
+import HomeScreen from '../screens/CitiesScreen';
 const DrawerNav = createDrawerNavigator();
 
 const Menus = (props) => {
@@ -16,6 +16,9 @@ const Menus = (props) => {
         >
             <DrawerNav.Screen
                 name="Home" component={Stack}
+            />
+            <DrawerNav.Screen
+                name="HomeScreen" component={HomeScreen}
             />
         </DrawerNav.Navigator>
     );
