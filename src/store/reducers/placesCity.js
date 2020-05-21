@@ -1,4 +1,5 @@
 import { PLACESCITY } from '../../data/dummy-data';
+import { PLACESCITYFAKE } from '../../data/fake-data';
 import {
     TOGGLE_FAVORITE,
     DELETE_PLACESCITY,
@@ -8,10 +9,11 @@ import {
 } from '../actions/placesCity';
 
 import PlacesCity from '../../models/PlacesCity';
+import PlacesCityFake from '../../models/PlacesCityFake';
 
 const initialState = {
-    availablePlacesCity: PLACESCITY,
-    userPlacesCity: PLACESCITY.filter(place => place.ownerId === 'u5'),
+    availablePlacesCity: PLACESCITYFAKE,
+    userPlacesCity: PLACESCITYFAKE.filter(place => place.ownerId === 'u1'),
     placesCity: PLACESCITY,
     favoritePlaces: []
 }
@@ -32,11 +34,11 @@ const placesCityReducer = (state = initialState, action) => {
             return (
                 {
                     availablePlacesCity: action.placesCity,
-                    userPlacesCity: action.placesCity.filter(place => place.ownerId === 'u5')
+                    userPlacesCity: action.placesCity.filter(place => place.ownerId === 'u1')
                 }
             );
         case CREATE_PLACESCITY:
-            const newPlacesCity = new PlacesCity(
+            const newPlacesCity = new PlacesCityFake(
                 action.placesCityData.placesCityId,
                 action.placesCityData.cityId,
                 action.placesCityData.placesCityName,
@@ -44,7 +46,7 @@ const placesCityReducer = (state = initialState, action) => {
                 action.placesCityData.complexity,
                 action.placesCityData.imageUrl,
                 action.placesCityData.duration,
-                'u5'
+                'u1'
             );
             return (
                 {
@@ -57,7 +59,7 @@ const placesCityReducer = (state = initialState, action) => {
             const placesCityIndex = state.userPlacesCity.findIndex(
                 place => place.placesCityId === action.placeCityId
             );
-            const updatedPlacesCity = new placesCity(
+            const updatedPlacesCity = new PlacesCityFake(
                 action.placesCityId,
                 action.placesCityData.cityId,
                 action.placesCityData.placesCityName,

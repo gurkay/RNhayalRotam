@@ -1,4 +1,5 @@
 import PlacesCity from '../../models/PlacesCity';
+import PlacesCityFake from '../../models/PlacesCityFake';
 
 export const DELETE_PLACESCITY = 'DELETE_PLACESCITY';
 export const CREATE_PLACESCITY = 'CREATE_PLACESCITY';
@@ -21,24 +22,15 @@ export const fetchPlacesCity = () => {
 
             for (const key in resData) {
                 loadedPlacesCity.push(
-                    new PlacesCity(
+                    new PlacesCityFake(
                         key,
-                        'c1',
+                        'c6',
                         resData[key].placesCityName,
                         resData[key].affordability,
                         resData[key].complexity,
                         resData[key].imageUrl,
                         resData[key].duration,
-                        resData[key].ingredients,
-                        resData[key].steps,
-                        resData[key].visiteTime,
-                        resData[key].enteryPrice,
-                        resData[key].webSite,
-                        resData[key].address,
-                        resData[key].phone,
-                        resData[key].mail,
-                        resData[key].placesCityLatitude,
-                        resData[key].placesCityLongitude
+                        'u1'
                     )
                 );
             }
@@ -72,16 +64,6 @@ export const createPlacesCity = (
     complexity,
     imageUrl,
     duration,
-    ingredients,
-    steps,
-    visiteTime,
-    enteryPrice,
-    webSite,
-    address,
-    phone,
-    mail,
-    placesCityLatitude,
-    placesCityLongitude,
     ownerId
 ) => {
     return async dispatch => {
@@ -100,16 +82,6 @@ export const createPlacesCity = (
                     complexity,
                     imageUrl,
                     duration,
-                    ingredients,
-                    steps,
-                    visiteTime,
-                    enteryPrice,
-                    webSite,
-                    address,
-                    phone,
-                    mail,
-                    placesCityLatitude,
-                    placesCityLongitude,
                     ownerId
                 })
             }
@@ -127,16 +99,6 @@ export const createPlacesCity = (
                 complexity,
                 imageUrl,
                 duration,
-                ingredients,
-                steps,
-                visiteTime,
-                enteryPrice,
-                webSite,
-                address,
-                phone,
-                mail,
-                placesCityLatitude,
-                placesCityLongitude,
                 ownerId
             }
         });
@@ -151,16 +113,6 @@ export const updatePlacesCity = (
     complexity,
     imageUrl,
     duration,
-    ingredients,
-    steps,
-    visiteTime,
-    enteryPrice,
-    webSite,
-    address,
-    phone,
-    mail,
-    placesCityLatitude,
-    placesCityLongitude,
     ownerId
 ) => {
     return async dispatch => {
@@ -178,16 +130,6 @@ export const updatePlacesCity = (
                     complexity,
                     imageUrl,
                     duration,
-                    ingredients,
-                    steps,
-                    visiteTime,
-                    enteryPrice,
-                    webSite,
-                    address,
-                    phone,
-                    mail,
-                    placesCityLatitude,
-                    placesCityLongitude,
                     ownerId
                 })
             }
@@ -207,16 +149,6 @@ export const updatePlacesCity = (
                 complexity,
                 imageUrl,
                 duration,
-                ingredients,
-                steps,
-                visiteTime,
-                enteryPrice,
-                webSite,
-                address,
-                phone,
-                mail,
-                placesCityLatitude,
-                placesCityLongitude,
                 ownerId
             }
         });

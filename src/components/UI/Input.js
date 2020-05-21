@@ -1,4 +1,4 @@
-import Reacr, { useEffect, useReducer } from 'react';
+import React, { useEffect, useReducer } from 'react';
 import {
     View,
     Text,
@@ -32,6 +32,7 @@ const inputReducer = (state, action) => {
 }
 
 const Input = (props) => {
+    console.log("Input : ", props);
     const [inputState, dispatch] = useReducer(inputReducer, {
         value: props.initialValue ? props.initialValue : '',
         isValid: props.initiallyValid,
@@ -47,6 +48,7 @@ const Input = (props) => {
     }, [inputState, onInputChange, id]);
 
     const textChangeHandler = text => {
+        console.log("Input text: ", text);
         const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         let isValid = true;
         if (props.required && text.trim().length === 0) {
@@ -64,6 +66,7 @@ const Input = (props) => {
         if (props.minLength != null && text.length < props.minLength) {
             isValid = false;
         }
+        console.log("Input text: ", text);
         dispatch({ type: INPUT_CHANGE, value: text, isValid: isValid });
     };
 
@@ -76,7 +79,7 @@ const Input = (props) => {
             <Text style={styles.label}>{props.label}</Text>
             <TextInput
                 {...props}
-                style={inputState.value}
+                style={styles.input}
                 onChangeText={textChangeHandler}
                 onBlur={lostFocusHandler}
             />
@@ -96,20 +99,21 @@ const styles = StyleSheet.create({
         width: '100%'
     },
     label: {
-        fontFamily: 'open-sans-bold',
         marginVertical: 8
     },
     input: {
         paddingHorizontal: 2,
         paddingVertical: 5,
         borderBottomColor: '#ccc',
-        borderBottomWidth: 1
+        borderBottomWidth: 1,
+        borderWidth: 0.5,
+        borderRadius: 4,
+
     },
     errorContainer: {
         marginVertical: 5
     },
     errorText: {
-        fontFamily: 'open-sans',
         color: 'red',
         fontSize: 13
     }

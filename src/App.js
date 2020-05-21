@@ -12,10 +12,12 @@ import ReduxThunk from 'redux-thunk';
 
 import MainNavigator from './navigation/MainNavigator';
 import citiesReducer from './store/reducers/cities';
+import placesCityReducer from './store/reducers/placesCity';
 
 enableScreens();
 
 const rootReducer = combineReducers({
+    placesCity: placesCityReducer,
     cities: citiesReducer
 });
 
@@ -31,9 +33,5 @@ const App = (props) => {
         </Provider>
     );
 }
-
-const styles = StyleSheet.create({
-
-});
 
 export default App;

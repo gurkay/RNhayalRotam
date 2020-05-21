@@ -1,9 +1,9 @@
-import Reacr, { useState, useEffect, useCallback, useReducer } from 'react';
+import React, { useState, useEffect, useCallback, useReducer } from 'react';
 import {
     View,
     ScrollView,
     StyleSheet,
-    Platform,
+    TouchableOpacity,
     Alert,
     KeyboardAvoidingView,
     ActivityIndicator
@@ -12,6 +12,8 @@ import {
 import { useSelector, useDispatch } from 'react-redux';
 import * as placesCityActions from '../store/actions/placesCity';
 import Input from '../components/UI/Input';
+import CityItem from '../components/CityItem';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const FORM_INPUT_UPDATE = 'FORM_INPUT_UPDATE';
 
@@ -29,22 +31,21 @@ const formReducer = (state, action) => {
         for (const key in updatedValidities) {
             updatedFormIsValid = updatedFormIsValid && updatedValidities[key];
         }
-        return (
-            {
-                formIsValid: updatedFormIsValid,
-                inputValidities: updatedValidities,
-                inputValues: updatedValues
-            }
-        );
+        return {
+            formIsValid: updatedFormIsValid,
+            inputValidities: updatedValidities,
+            inputValues: updatedValues
+        }
     }
     return state;
 }
 
 const EditPlacesCityScreen = (props) => {
+    console.log("#EditPlaces : ", props);
     const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState;
+    const [error, setError] = useState();
 
-    const placesCityId = props.route.params.placesCityId;
+    const placesCityId = 'p5';// props.route.params.placesCityId;
     const editedPlacesCity = useSelector(state =>
         state.placesCity.userPlacesCity.find(place => place.placesCityId === placesCityId)
     );
@@ -53,7 +54,7 @@ const EditPlacesCityScreen = (props) => {
 
     const [formState, dispatchFormState] = useReducer(formReducer, {
         inputValue: {
-            cityId: editedPlacesCity ? editedPlacesCity.cityId : '',
+            cityId: editedPlacesCity ? editedPlacesCity.placesCityName : '',
             placesCityName: editedPlacesCity ? editedPlacesCity.placesCityName : '',
             affordability: editedPlacesCity ? editedPlacesCity.affordability : '',
             complexity: editedPlacesCity ? editedPlacesCity.complexity : '',
@@ -98,6 +99,17 @@ const EditPlacesCityScreen = (props) => {
                         formState.inputValues.affordability,
                         formState.inputValues.complexity,
                         formState.inputValues.imageUrl,
+                        formState.inputValues.duration,
+                    )
+                );
+            } else {
+                await dispatch(
+                    placesCityActions.createPlacesCity(
+                        formState.inputValues.cityId,
+                        formState.inputValues.placesCityName,
+                        formState.inputValues.affordability,
+                        formState.inputValues.complexity,
+                        formState.inputValues.imageUrl,
                         +formState.inputValues.duration,
                     )
                 );
@@ -128,16 +140,15 @@ const EditPlacesCityScreen = (props) => {
     if (isLoading) {
         return (
             <View style={StyleSheet.centered}>
-                <ActivityIndicator size="large" color='#4d8be3' />
+                <ActivityIndicator size="large" color="red" />
             </View>
         );
     }
 
-
     props.navigation.setOptions({
-        headerTitle: props.route.params.placesCityId
-        ? 'Edit Places'
-        : 'Add Places',
+        headerTitle: 'p5'// props.route.params.placesCityId
+            ? 'Edit Places'
+            : 'Add Places',
         headerRight: () => (
             <TouchableOpacity
                 style={styles.container}
@@ -145,7 +156,7 @@ const EditPlacesCityScreen = (props) => {
             >
                 <View style={styles.headerButtonContainer}>
                     <Ionicons
-                        name={Platform.OS === 'android' ? "md-checkmark" : "ios-checkmark"}
+                        name="ios-checkmark"
                         size={24}
                         color="#4d8be3" />
                 </View>
@@ -161,7 +172,14 @@ const EditPlacesCityScreen = (props) => {
         >
             <ScrollView>
                 <View style={styles.form}>
-                    <Input
+                    <CityItem
+                        id="cityId"
+                        label="City Id"
+                        onValueChange={inputChangeHandler}
+                        initialValue={editedPlacesCity ? editedPlacesCity.cityId : ''}
+                        initiallyValid={!!editedPlacesCity}
+                    />
+                    {/* <Input
                         id="cityId"
                         label="City Id"
                         errorText="Please enter a valid City Id!"
@@ -173,7 +191,7 @@ const EditPlacesCityScreen = (props) => {
                         initialValue={editedPlacesCity ? editedPlacesCity.cityId : ''}
                         initiallyValid={!!editedPlacesCity}
                         required
-                    />
+                    /> */}
                     <Input
                         id="placesCityName"
                         label="Places City Name"
@@ -221,7 +239,7 @@ const EditPlacesCityScreen = (props) => {
                         returnKeyType="next"
                         onInputChange={inputChangeHandler}
                         initialValue={editedPlacesCity ? editedPlacesCity.imageUrl : ''}
-                        initiallyValid={!!editedProduct}
+                        initiallyValid={!!editedPlacesCity}
                         required
                     />
                     {editedPlacesCity ? null : (
@@ -250,6 +268,9 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center'
+    },
+    headerButtonContainer: {
+        marginRight: 5,
     }
 });
 
