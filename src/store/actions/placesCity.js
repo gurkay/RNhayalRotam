@@ -24,13 +24,13 @@ export const fetchPlacesCity = () => {
                 loadedPlacesCity.push(
                     new PlacesCityFake(
                         key,
-                        'c6',
+                        resData[key].cityId,
                         resData[key].placesCityName,
                         resData[key].affordability,
                         resData[key].complexity,
                         resData[key].imageUrl,
                         resData[key].duration,
-                        'u1'
+                        resData[key].ownerId,
                     )
                 );
             }
@@ -63,9 +63,9 @@ export const createPlacesCity = (
     affordability,
     complexity,
     imageUrl,
-    duration,
-    ownerId
+    duration
 ) => {
+    console.log("action cityId: ", cityId);
     return async dispatch => {
         // any async code you want
         const response = await fetch(
@@ -82,7 +82,7 @@ export const createPlacesCity = (
                     complexity,
                     imageUrl,
                     duration,
-                    ownerId
+                    ownerId: 'u1'
                 })
             }
         );
@@ -91,7 +91,7 @@ export const createPlacesCity = (
 
         dispatch({
             type: CREATE_PLACESCITY,
-            placeData: {
+            placesCityData: {
                 placesCityId: resData.name,
                 cityId,
                 placesCityName,
@@ -99,7 +99,7 @@ export const createPlacesCity = (
                 complexity,
                 imageUrl,
                 duration,
-                ownerId
+                ownerId: 'u1'
             }
         });
     }

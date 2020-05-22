@@ -45,7 +45,7 @@ const EditPlacesCityScreen = (props) => {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState();
 
-    const placesCityId = 'p5';// props.route.params.placesCityId;
+    const placesCityId = props.navigation.placesCityId;
     const editedPlacesCity = useSelector(state =>
         state.placesCity.userPlacesCity.find(place => place.placesCityId === placesCityId)
     );
@@ -89,6 +89,7 @@ const EditPlacesCityScreen = (props) => {
         }
         setError(null);
         setIsLoading(true);
+        console.log("#editPlacesScreen => editPlacesCity : ", editedPlacesCity);
         try {
             if (editedPlacesCity) {
                 await dispatch(
@@ -172,14 +173,14 @@ const EditPlacesCityScreen = (props) => {
         >
             <ScrollView>
                 <View style={styles.form}>
-                    <CityItem
+                    {/* <CityItem
                         id="cityId"
                         label="City Id"
                         onValueChange={inputChangeHandler}
                         initialValue={editedPlacesCity ? editedPlacesCity.cityId : ''}
                         initiallyValid={!!editedPlacesCity}
-                    />
-                    {/* <Input
+                    /> */}
+                    <Input
                         id="cityId"
                         label="City Id"
                         errorText="Please enter a valid City Id!"
@@ -191,7 +192,7 @@ const EditPlacesCityScreen = (props) => {
                         initialValue={editedPlacesCity ? editedPlacesCity.cityId : ''}
                         initiallyValid={!!editedPlacesCity}
                         required
-                    /> */}
+                    />
                     <Input
                         id="placesCityName"
                         label="Places City Name"
@@ -251,7 +252,6 @@ const EditPlacesCityScreen = (props) => {
                             returnKeyType="next"
                             onInputChange={inputChangeHandler}
                             required
-                            min={0.1}
                         />
                     )}
                 </View>

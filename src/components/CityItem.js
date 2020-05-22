@@ -31,7 +31,7 @@ const CityItem = (props) => {
     const [selectedValue, setSelectedValue] = useState("Adana");
     const [inputState, dispatch] = useReducer(inputReducer, {
         value: props.initialValue ? props.initialValue : '',
-        isValid: true,
+        isValid: props.initiallyValid,
         touched: false
     });
 

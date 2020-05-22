@@ -46,7 +46,7 @@ const placesCityReducer = (state = initialState, action) => {
                 action.placesCityData.complexity,
                 action.placesCityData.imageUrl,
                 action.placesCityData.duration,
-                'u1'
+                action.placesCityData.ownerId
             );
             return (
                 {

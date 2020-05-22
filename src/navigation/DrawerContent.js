@@ -10,7 +10,7 @@ import { DrawerContentScrollView } from '@react-navigation/drawer'
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const DrawerContent = (props) => {
-    console.log("#DrawerContent : ", props);
+
     return (
         <DrawerContentScrollView>
 
