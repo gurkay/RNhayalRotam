@@ -12,13 +12,15 @@ import ReduxThunk from 'redux-thunk';
 
 import MainNavigator from './navigation/MainNavigator';
 import citiesReducer from './store/reducers/cities';
+import authReducer from './store/reducers/auth';
 import placesCityReducer from './store/reducers/placesCity';
 
 enableScreens();
 
 const rootReducer = combineReducers({
     placesCity: placesCityReducer,
-    cities: citiesReducer
+    cities: citiesReducer,
+    auth: authReducer
 });
 
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk));

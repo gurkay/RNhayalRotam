@@ -9,8 +9,10 @@ import {
 import { DrawerContentScrollView } from '@react-navigation/drawer'
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-const DrawerContent = (props) => {
+import{ AuthContext } from '../components/context';
 
+const DrawerContent = (props) => {
+    const { signOut, toggleTheme } = React.useContext(AuthContext);
     return (
         <DrawerContentScrollView>
 
@@ -37,6 +39,16 @@ const DrawerContent = (props) => {
                 <View style={styles.drawerContainer}>
                     <Ionicons name="md-add" size={24} color="#4d8be3" />
                     <Text style={styles.drawerText}>Add Place</Text>
+                </View>
+            </TouchableOpacity>
+
+
+            <TouchableOpacity
+                onPress={() => {signOut()}}
+            >
+                <View style={styles.drawerContainer}>
+                    <Ionicons name="md-person" size={24} color="#4d8be3" />
+                    <Text style={styles.drawerText}>Sign Out</Text>
                 </View>
             </TouchableOpacity>
 

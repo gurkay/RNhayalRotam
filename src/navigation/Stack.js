@@ -11,6 +11,9 @@ import { DrawerActions } from '@react-navigation/native';
 import FavoritesScreen from '../screens/FavoritesScreen';
 import PlaceDetailScreen from '../screens/PlaceDetailScreen';
 import PlacesCityScreen from '../screens/PlacesCityScreen';
+import SignIn from '../screens/SignIn';
+import SignUp from '../screens/SignUp';
+
 import MapScreen from '../screens/MapScreen';
 import EditPlacesCityScreen from '../screens/EditPlacesCityScreen';
 
@@ -104,6 +107,30 @@ const Stack = (props) => {
                     const routeName = route.state
                         ? route.state.routes[route.state.index].name
                         : 'Edit Places City';
+                    return {
+                        headerTitle: routeName,
+                    };
+                }}
+            />
+            <StackNav.Screen
+                name="SignIn"
+                component={SignIn}
+                options={({ route }) => {
+                    const routeName = route.state
+                        ? route.state.routes[route.state.index].name
+                        : 'Sign In';
+                    return {
+                        headerTitle: routeName,
+                    };
+                }}
+            />
+            <StackNav.Screen
+                name="SignUp"
+                component={SignUp}
+                options={({ route }) => {
+                    const routeName = route.state
+                        ? route.state.routes[route.state.index].name
+                        : 'Sıgn Up';
                     return {
                         headerTitle: routeName,
                     };
